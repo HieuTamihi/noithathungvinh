@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ Chi Tiết Doanh Thu - Mẫu S1a-HKD</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sổ Chi Tiết Doanh Thu Bán Hàng Hóa, Dịch Vụ</h1>
+            <p class="subtitle">Mẫu số S1a-HKD</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar: Danh sách hộ kinh doanh đã lưu -->
+            <aside class="sidebar">
+                <h3>Hộ Kinh Doanh Đã Lưu</h3>
+                <div id="savedList"></div>
+                <button class="btn btn-new" onclick="createNew()">+ Tạo mới</button>
+            </aside>
+
+            <!-- Form nhập liệu -->
+            <main class="form-section">
+                <form id="businessForm">
+                    <section class="info-section">
+                        <h3>Thông tin Hộ Kinh Doanh</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="businessName">Hộ, cá nhân kinh doanh:</label>
+                                <input type="text" id="businessName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Địa chỉ:</label>
+                                <input type="text" id="address" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="taxCode">Mã số thuế:</label>
+                                <input type="text" id="taxCode" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessLocation">Địa điểm kinh doanh:</label>
+                                <input type="text" id="businessLocation">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="declarationPeriod">Kỳ kê khai:</label>
+                                <input type="text" id="declarationPeriod" placeholder="VD: Quý 4/2025">
+                            </div>
+                            <div class="form-group">
+                                <label for="representative">Người đại diện:</label>
+                                <input type="text" id="representative">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="transactions-section">
+                        <h3>Chi Tiết Giao Dịch</h3>
+                        <table id="transactionTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 150px;">Ngày tháng</th>
+                                    <th>Giao dịch</th>
+                                    <th style="width: 150px;">Số tiền</th>
+                                    <th style="width: 50px;">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionBody">
+                            </tbody>
+                            <tfoot>
+                                <tr class="total-row">
+                                    <td></td>
+                                    <td style="text-align: left;">Tổng cộng:</td>
+                                    <td id="totalAmount">0</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <button type="button" class="btn btn-add" onclick="addRow()">+ Thêm dòng</button>
+                    </section>
+
+                    <section class="date-section">
+                        <h3>Ngày kê khai</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="signDay">Ngày:</label>
+                                <input type="number" id="signDay" min="1" max="31" value="22">
+                            </div>
+                            <div class="form-group">
+                                <label for="signMonth">Tháng:</label>
+                                <input type="number" id="signMonth" min="1" max="12" value="12">
+                            </div>
+                            <div class="form-group">
+                                <label for="signYear">Năm:</label>
+                                <input type="number" id="signYear" min="2020" max="2100" value="2025">
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-save" onclick="saveData()">Lưu thông tin</button>
+                        <button type="button" class="btn btn-preview" onclick="showPreview()">Xem trước</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal xem trước -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Xem Trước Văn Bản</h2>
+                <span class="close" onclick="closePreview()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="previewContent"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="orientation-select">
+                    <label>Hướng giấy:</label>
+                    <select id="pageOrientation">
+                        <option value="landscape">Ngang (Landscape)</option>
+                        <option value="portrait">Dọc (Portrait)</option>
+                    </select>
+                </div>
+                <button class="btn btn-word" onclick="exportWord()">Tải Word</button>
+                <button class="btn btn-pdf" onclick="exportPDF()">Tải PDF</button>
+                <button class="btn btn-close" onclick="closePreview()">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
