@@ -605,17 +605,46 @@ td input:focus {
         border: none;
         padding: 10px 0;
         position: relative;
+        display: block;
+        width: 100%;
     }
     
     /* Input Styling in Card - Full Width */
     #transactionTable td input {
-        width: 100%;
+        display: block;
+        width: 100% !important;
         border: 1px solid #ced4da;
         background: #fff;
         padding: 12px;
         border-radius: 4px;
         font-size: 16px;
         box-sizing: border-box;
+    }
+    
+    /* Ẩn cột "Tổng cộng" trong tfoot trên mobile */
+    #transactionTable tfoot {
+        display: block;
+        width: 100%;
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+    
+    #transactionTable tfoot tr {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    #transactionTable tfoot td {
+        display: inline;
+        padding: 0;
+    }
+    
+    #transactionTable tfoot td:first-child,
+    #transactionTable tfoot td:last-child {
+        display: none;
     }
     
     #transactionTable td:nth-child(1)::before { content: "Ngày tháng:"; display: block; font-weight: bold; margin-bottom: 5px; color: #666; }
